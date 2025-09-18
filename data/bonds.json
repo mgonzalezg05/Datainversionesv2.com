@@ -1,0 +1,123 @@
+
+[
+  {
+    "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+    "ticker": "S31O5",
+    "tipo": "LECAP",
+    "vencimiento": "2025-10-31",
+    "valor_nominal": 100,
+    "precio_limpio": 95.50,
+    "interes_devengado": 0,
+    "comision_bp": 10,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "b2c3d4e5-f6a7-8901-2345-67890abcdef1",
+    "ticker": "S28N5",
+    "tipo": "LECAP",
+    "vencimiento": "2025-11-28",
+    "valor_nominal": 100,
+    "precio_limpio": 94.20,
+    "interes_devengado": 0,
+    "comision_bp": 10,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "c3d4e5f6-a7b8-9012-3456-7890abcdef12",
+    "ticker": "S31D5",
+    "tipo": "LECAP",
+    "vencimiento": "2025-12-31",
+    "valor_nominal": 100,
+    "precio_limpio": 92.80,
+    "interes_devengado": 0,
+    "comision_bp": 10,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "d4e5f6a7-b8c9-0123-4567-890abcdef123",
+    "ticker": "S31E6",
+    "tipo": "LECAP",
+    "vencimiento": "2026-01-31",
+    "valor_nominal": 100,
+    "precio_limpio": 90.10,
+    "interes_devengado": 0,
+    "comision_bp": 15,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "e5f6a7b8-c9d0-1234-5678-90abcdef1234",
+    "ticker": "S30A6",
+    "tipo": "LECAP",
+    "vencimiento": "2026-04-30",
+    "valor_nominal": 100,
+    "precio_limpio": 85.40,
+    "interes_devengado": 0,
+    "comision_bp": 15,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "f6a7b8c9-d0e1-2345-6789-0abcdef12345",
+    "ticker": "S31Y6",
+    "tipo": "LECAP",
+    "vencimiento": "2026-07-31",
+    "valor_nominal": 100,
+    "precio_limpio": 81.00,
+    "interes_devengado": 0,
+    "comision_bp": 15,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "a7b8c9d0-e1f2-3456-7890-bcdef1234567",
+    "ticker": "S29E7",
+    "tipo": "LECAP",
+    "vencimiento": "2027-01-29",
+    "valor_nominal": 100,
+    "precio_limpio": 75.50,
+    "interes_devengado": 0,
+    "comision_bp": 20,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "b8c9d0e1-f2a3-4567-8901-cdef12345678",
+    "ticker": "TO26",
+    "tipo": "BONO_FIJO",
+    "vencimiento": "2026-10-30",
+    "valor_nominal": 100,
+    "precio_limpio": 78.00,
+    "interes_devengado": 2.5,
+    "comision_bp": 20,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "c9d0e1f2-a3b4-5678-9012-def123456789",
+    "ticker": "PR15",
+    "tipo": "BONO_FIJO",
+    "vencimiento": "2027-03-15",
+    "valor_nominal": 100,
+    "precio_limpio": 72.30,
+    "interes_devengado": 1.8,
+    "comision_bp": 20,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  },
+  {
+    "id": "d0e1f2a3-b4c5-6789-0123-ef1234567890",
+    "ticker": "AA28",
+    "tipo": "BONO_FIJO",
+    "vencimiento": "2028-08-01",
+    "valor_nominal": 100,
+    "precio_limpio": 65.00,
+    "interes_devengado": 4.1,
+    "comision_bp": 25,
+    "fecha_liquidacion": "2025-09-19",
+    "fuente_cotizacion": "manual"
+  }
+]

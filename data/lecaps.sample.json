@@ -1,0 +1,234 @@
+{
+  "version": "lecaps.v1",
+  "updated_at": "2025-09-18T14:30:21-03:00",
+  "params": {
+    "base": "30_360",
+    "t_plus": 0,
+    "comision_pct": 0.001,
+    "dm_pct": 1e-05,
+    "dm_monto": 0.0
+  },
+  "items": [
+    {
+      "ticker": "S30S5",
+      "emision": "2024-09-30",
+      "vencimiento": "2025-09-30",
+      "tem": 0.0398,
+      "precios": {
+        "ultimo": 157.715,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": 0.001,
+        "dm_pct": 1e-05,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "T17O5",
+      "emision": "2024-10-14",
+      "vencimiento": "2025-10-17",
+      "tem": 0.039,
+      "precios": {
+        "ultimo": 154.38,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "S31O5",
+      "emision": "2024-12-16",
+      "vencimiento": "2025-10-31",
+      "tem": 0.0274,
+      "precios": {
+        "ultimo": 126.61,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "S10N5",
+      "emision": "2025-02-03",
+      "vencimiento": "2025-11-10",
+      "tem": 0.022,
+      "precios": {
+        "ultimo": 115.011,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "S28N5",
+      "emision": "2025-02-14",
+      "vencimiento": "2025-11-28",
+      "tem": 0.0226,
+      "precios": {
+        "ultimo": 113.77,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "T15D5",
+      "emision": "2024-10-14",
+      "vencimiento": "2025-12-15",
+      "tem": 0.0389,
+      "precios": {
+        "ultimo": 153.0,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "S16E6",
+      "emision": "2025-08-18",
+      "vencimiento": "2026-01-16",
+      "tem": 0.036,
+      "precios": {
+        "ultimo": 103.0,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "T30E6",
+      "emision": "2024-12-16",
+      "vencimiento": "2026-01-30",
+      "tem": 0.0265,
+      "precios": {
+        "ultimo": 119.0,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "T13F6",
+      "emision": "2024-11-29",
+      "vencimiento": "2026-02-13",
+      "tem": 0.026,
+      "precios": {
+        "ultimo": 118.4,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "S27F6",
+      "emision": "2025-08-29",
+      "vencimiento": "2026-02-27",
+      "tem": 0.0395,
+      "precios": {
+        "ultimo": 107.0,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "S29Y6",
+      "emision": "2025-05-30",
+      "vencimiento": "2026-05-29",
+      "tem": 0.0235,
+      "precios": {
+        "ultimo": 95.651,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "T30J6",
+      "emision": "2025-01-17",
+      "vencimiento": "2026-06-30",
+      "tem": 0.0215,
+      "precios": {
+        "ultimo": 100.8,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    },
+    {
+      "ticker": "T15E7",
+      "emision": "2025-07-31",
+      "vencimiento": "2027-07-15",
+      "tem": 0.0205,
+      "precios": {
+        "ultimo": 91.01,
+        "compra": null,
+        "cierre": null
+      },
+      "overrides": {
+        "comision_pct": null,
+        "dm_pct": null,
+        "dm_monto": null,
+        "t_plus": null
+      }
+    }
+  ]
+}

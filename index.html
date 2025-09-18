@@ -1,0 +1,675 @@
+﻿
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Datainversiones.com - Bonos argentinos, LECAPs y calculadoras</title>
+  <meta name="description" content="Herramientas y calculadoras para el inversor argentino. Analiza el rendimiento de bonos, LECAPs y converti TNA/TEA. Decidi con data clara y actualizada." />
+  <link rel="canonical" href="https://mgonzalezg05.github.io/Datainversiones/" />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Open Graph / Facebook & LinkedIn -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Datainversiones.com - Calculadoras para bonos argentinos y LECAPs" />
+  <meta property="og:description" content="Herramientas y calculadoras para el inversor argentino. Analiza el rendimiento de bonos, LECAPs y converti TNA/TEA." />
+  <meta property="og:url" content="https://mgonzalezg05.github.io/Datainversiones/" />
+  <meta property="og:site_name" content="Datainversiones.com" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0284c7/ffffff&text=Datainversiones.com" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content="es_AR" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Datainversiones.com - Calculadoras para bonos argentinos y LECAPs" />
+  <meta name="twitter:description" content="Herramientas y calculadoras para el inversor argentino. Analiza el rendimiento de bonos, LECAPs y converti TNA/TEA." />
+  <meta name="twitter:image" content="https://dummyimage.com/1200x630/0284c7/ffffff&text=Datainversiones.com" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"></noscript>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9', // cyan sky
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e'
+            },
+            market: {
+              green: '#16a34a',
+              red: '#dc2626',
+              gold: '#eab308'
+            }
+          },
+          boxShadow: {
+            smooth: '0 10px 30px -15px rgba(2,132,199,0.3)'
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="assets/app.css">
+
+  <!-- Schema.org for Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Datainversiones",
+    "url": "https://mgonzalezg05.github.io/Datainversiones/",
+    "logo": "https://dummyimage.com/200x200/0284c7/ffffff&text=DI",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "soporte@datainversiones.com"
+    },
+    "sameAs": [
+      "https://twitter.com/datainversiones_placeholder",
+      "https://www.linkedin.com/company/datainversiones_placeholder"
+    ]
+  }
+  </script>
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="img/logo.png" type="image/png">
+  <link rel="alternate" href="https://mgonzalezg05.github.io/Datainversiones/" hreflang="es-AR" />
+  <link rel="alternate" href="https://mgonzalezg05.github.io/Datainversiones/" hreflang="x-default" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Datainversiones",
+  "url": "https://mgonzalezg05.github.io/Datainversiones/",
+  "inLanguage": "es-AR"
+}
+</script>
+</head>
+<body class="bg-white text-slate-800 antialiased">
+  <!-- Header / Nav -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="#inicio" class="flex items-center gap-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+          <img src="img/logo.png" alt="Logo Datainversiones" class="w-12 h-12" style="background:transparent;border-radius:50%;object-fit:contain;" />
+          <span class="font-semibold text-lg">Datainversiones<span class="text-brand-600">.com</span></span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="#herramientas" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Herramientas</a>
+          <a href="#quees" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Que es?</a>
+          <a href="#blog" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Blog</a>
+          <a href="#" id="openModalBtn" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Newsletter</a>
+          <a href="#testimonios" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Testimonios</a>
+          <a href="#contacto" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Contacto</a>
+          <a href="/pages/lecaps-beta.html" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">LECAPs (beta)</a>
+          <a href="admin.html" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Panel Admin</a>
+        </nav>
+        <button class="md:hidden inline-flex items-center p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500" id="menuBtn" aria-label="Abrir menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+        </button>
+      </div>
+      <div id="mobileNav" class="md:hidden hidden pb-4">
+        <div class="grid gap-2 text-sm">
+          <a href="#herramientas" class="px-3 py-2 rounded-lg hover:bg-slate-100">Herramientas</a>
+          <a href="#quees" class="px-3 py-2 rounded-lg hover:bg-slate-100">Que es?</a>
+          <a href="#blog" class="px-3 py-2 rounded-lg hover:bg-slate-100">Blog</a>
+          <a href="#" id="openModalBtnMobile" class="px-3 py-2 rounded-lg hover:bg-slate-100">Newsletter</a>
+          <a href="#testimonios" class="px-3 py-2 rounded-lg hover:bg-slate-100">Testimonios</a>
+          <a href="#contacto" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contacto</a>
+          <a href="/pages/lecaps-beta.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">LECAPs (beta)</a>
+          <a href="admin.html" class="px-3 py-2 rounded-lg bg-brand-600 text-white">Panel Admin</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="inicio" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-brand-100 to-brand-200"></div>
+    <div class="absolute -top-24 -right-24 w-[420px] h-[420px] rounded-full bg-brand-200 blur-3xl opacity-40"></div>
+    <div class="relative max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+            Inverti mejor en <span class="text-brand-700">bonos argentinos</span> y <span class="text-brand-700">LECAPs</span>
+          </h1>
+          <p class="mt-4 text-lg text-slate-600 max-w-2xl">Datainversiones.com reune <strong>datos claros</strong>, <strong>calculadoras</strong> y <strong>senales</strong> para ayudarte a decidir rapido: rendimiento, TNA/TEA, flujos y oportunidades.
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#herramientas" class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Ver Panel Interactivo</a>
+            <a href="admin.html" class="px-5 py-3 rounded-xl border border-brand-200 text-brand-700 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Administrar Datos</a>
+          </div>
+          <div class="mt-6 flex items-center gap-6 text-sm text-slate-500">
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-market-green"></span> Datos en tiempo real</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-brand-500"></span> UX simple</div>
+            <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-market-gold"></span> Foco en Argentina</div>
+          </div>
+        </div>
+        
+        <!-- Panel de Rendimientos DinAmico -->
+        <div class="card" style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <div class="flex items-center justify-between">
+                 <h2 style="color: #0d6efd; font-size: 1.5rem; font-weight: bold;">Curva de Rendimientos</h2>
+                 <a href="admin.html" class="btn secondary">Admin</a>
+            </div>
+            <div class="controls mt-4">
+                <button id="metric-toggle">Ver TEM</button>
+            </div>
+            <div id="chart-container" class="mt-4">
+                <canvas id="yield-chart"></canvas>
+            </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Herramientas / Panel Interactivo -->
+  <section id="herramientas" class="py-16 md:py-24 bg-slate-50">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold">Panel Interactivo de Bonos y LECAPs</h2>
+        <p class="mt-2 text-slate-600">Analiza, compara y ordena los instrumentos segun tus criterios. Los cambios que hagas en el <a href="admin.html" class="text-brand-600 underline">panel de administracion</a> se reflejaran aqui.</p>
+      </div>
+
+      <div class="card mt-10">
+          <div style="overflow-x: auto;">
+              <table id="bonds-table">
+                  <thead>
+                      <tr>
+                          <th data-key="ticker">Ticker</th>
+                          <th data-key="vencimiento">Vencimiento</th>
+                          <th data-key="dias_al_vto">Dias/Meses al VTO</th>
+                          <th data-key="precio_limpio">Precio Limpio</th>
+                          <th data-key="interes_devengado">Devengado</th>
+                          <th data-key="comision_bp">Comision</th>
+                          <th data-key="precio_sucio">Precio Sucio</th>
+                          <th data-key="rendimiento_vto">Rend. VTO</th>
+                          <th data-key="tem">TEM</th>
+                          <th data-key="tea">TEA</th>
+                      </tr>
+                  </thead>
+                  <tbody id="bonds-table-body">
+                      <!-- Rows will be injected by JS -->
+                  </tbody>
+              </table>
+          </div>
+      </div>
+
+      <div class="mt-6 text-xs text-slate-500">*Resultados a modo informativo. Ver terminos al pie.</div>
+    </div>
+  </section>
+
+  <!-- Que es? -->
+  <section id="quees" class="py-16">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-10 items-start">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold">Que es Datainversiones.com?</h2>
+          <p class="mt-4 text-slate-700 leading-relaxed">Somos una plataforma enfocada en el <strong>mercado argentino</strong> que simplifica el anAlisis de <strong>bonos</strong> y <strong>LECAPs</strong>. Unimos datos publicos y calculos clave en una experiencia fluida para que puedas identificar rapidamente: <em>rendimiento esperado</em>, <em>spread vs. alternativas</em>, <em>flujo de cupones</em> y <em>riesgos</em>.</p>
+          <ul class="mt-4 space-y-2 text-slate-700">
+            <li class="flex gap-2"><span class="text-brand-600">-</span> Tableros claros y comparables.</li>
+            <li class="flex gap-2"><span class="text-brand-600">-</span> Calculadoras de TNA/TEA, duration (proximamente) y carry.</li>
+            <li class="flex gap-2"><span class="text-brand-600">-</span> Exportacion de escenarios a Excel (proximamente).</li>
+          </ul>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-semibold">Roadmap</h3>
+          <ol class="mt-3 space-y-3 text-sm text-slate-700">
+            <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-brand-100 text-brand-700 grid place-content-center">1</span> Agregar curvas de rendimiento y spreads.</li>
+            <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-brand-100 text-brand-700 grid place-content-center">2</span> Duration, convexidad y escenarios de tasa.</li>
+            <li class="flex gap-3"><span class="w-6 h-6 rounded-full bg-brand-100 text-brand-700 grid place-content-center">3</span> Alertas por correo/WhatsApp segun objetivos.</li>
+          </ol>
+          <div class="mt-4 text-xs text-slate-500">ATe interesa participar de la beta? Escribinos abajo y te sumamos.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section id="testimonios" class="py-16 bg-slate-50">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl md:text-4xl font-extrabold">Clientes contentos (placeholder)</h2>
+      <p class="mt-2 text-slate-600">Ejemplos inventados para luego reemplazar por casos reales cuando este operativa la pagina.</p>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <article class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-200 text-brand-800 grid place-content-center font-bold">AG</div>
+            <div>
+              <div class="font-semibold">Agustina Gomez</div>
+              <div class="text-xs text-slate-500">Profesional independiente</div>
+            </div>
+          </div>
+          <p class="mt-4 text-slate-700">"Con la calculadora de LECAPs puedo comparar vencimientos en segundos. Me ahorra horas."</p>
+        </article>
+        <article class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-200 text-brand-800 grid place-content-center font-bold">RM</div>
+            <div>
+              <div class="font-semibold">Ricardo Mena</div>
+              <div class="text-xs text-slate-500">Administrador de cartera</div>
+            </div>
+          </div>
+          <p class="mt-4 text-slate-700">"La interfaz es limpia y las formulas son claras. Ideal para estimar rapidamente el rendimiento."</p>
+        </article>
+        <article class="p-6 bg-white rounded-2xl border border-slate-200 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-brand-200 text-brand-800 grid place-content-center font-bold">LC</div>
+            <div>
+              <div class="font-semibold">Lucia Cabrera</div>
+              <div class="text-xs text-slate-500">PyME exportadora</div>
+            </div>
+          </div>
+          <p class="mt-4 text-slate-700">"Puedo ver spreads y decidir si me conviene tasa fija o CER sin perder tiempo."</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blog -->
+  <section id="blog" class="py-16">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center">
+        <h2 class="text-3xl md:text-4xl font-extrabold">Desde Nuestro Blog</h2>
+        <p class="mt-2 text-slate-600">Analisis y guias sobre el mercado financiero argentino.</p>
+      </div>
+      <div class="mt-10 max-w-lg mx-auto grid gap-5 lg:grid-cols-1 lg:max-w-none">
+        <div class="flex flex-col rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+          <div class="flex-shrink-0">
+            <img loading="lazy" class="h-48 w-full object-cover" src="https://dummyimage.com/600x400/0ea5e9/ffffff&text=Guia+LECAPs" alt="Imagen ilustrativa de LECAPs">
+          </div>
+          <div class="flex-1 bg-white p-6 flex flex-col justify-between">
+            <div class="flex-1">
+              <p class="text-sm font-medium text-brand-700">
+                <a href="blog/entrada-lecaps.html" class="hover:underline">Bonos y Letras</a>
+              </p>
+              <a href="blog/entrada-lecaps.html" class="block mt-2">
+                <p class="text-xl font-semibold text-slate-900">Lecaps en Argentina: que son, como invertir y por que pueden ganarle al plazo fijo</p>
+                <p class="mt-3 text-base text-slate-500">Una guia educativa en primera persona sobre como funcionan las LECAPs, incluyendo ejemplos de rendimiento, liquidez y comparativas con otras opciones de corto plazo.</p>
+              </a>
+            </div>
+            <div class="mt-6 flex items-center">
+              <div class="flex-shrink-0">
+                <span class="sr-only">Datainversiones</span>
+                <div class="w-10 h-10 rounded-full bg-brand-500 text-white grid place-content-center font-extrabold">DI</div>
+              </div>
+              <div class="ml-3">
+                <p class="text-sm font-medium text-slate-900">Datainversiones</p>
+                <div class="flex space-x-1 text-sm text-slate-500">
+                  <time datetime="2025-09-16">16 de sep, 2025</time>
+                  <span aria-hidden="true">&middot;</span>
+                  <span>10 min de lectura</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingresar con Google -->
+  <section id="ingresar" class="py-16">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold">Ingresa en un click</h2>
+          <p class="mt-3 text-slate-700">Autenticacion simple con Google. Cuidamos tu privacidad y solo pedimos los datos minimos para tu cuenta.</p>
+          <button id="googleBtn" role="button" class="mt-5 inline-flex items-center gap-3 px-5 py-3 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+            <img loading="lazy" src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" class="w-5 h-5"/>
+            <span>Continuar con Google</span>
+          </button>
+          <div id="googleMock" class="mt-3 hidden text-sm text-brand-700">(Demo) Se abriria el flujo de Google OAuth...</div>
+          <p class="mt-3 text-xs text-slate-500">Al continuar aceptAs nuestros <a href="#terminos" class="text-brand-700 underline">Terminos</a> y <a href="#privacidad" class="text-brand-700 underline">Politica de Privacidad</a>.</p>
+        </div>
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-semibold">Beneficios de registrarte</h3>
+          <ul class="mt-3 space-y-2 text-slate-700">
+            <li class="flex gap-2"><span class="text-brand-600">-</span> Guarda tus carteras y escenarios.</li>
+            <li class="flex gap-2"><span class="text-brand-600">-</span> Alertas personalizadas por vencimientos.</li>
+            <li class="flex gap-2"><span class="text-brand-600">-</span> Sincronizacion en todos tus dispositivos.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contacto -->
+  <section id="contacto" class="py-16 bg-slate-50">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl md:text-4xl font-extrabold">Hablemos</h2>
+        <p class="mt-2 text-slate-600">Contanos que herramientas te gustaria ver o pedi acceso a la beta.</p>
+      </div>
+      <form class="mt-8 grid md:grid-cols-2 gap-6" onsubmit="return submitContact(event)">
+        <div>
+          <label for="cNombre" class="block text-sm font-medium">Nombre y apellido</label>
+          <input type="text" id="cNombre" required class="mt-1 w-full border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="Tu nombre" />
+        </div>
+        <div>
+          <label for="cEmail" class="block text-sm font-medium">Email</label>
+          <input type="email" id="cEmail" required class="mt-1 w-full border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="tu@email.com" />
+        </div>
+        <div class="md:col-span-2">
+          <label for="cMensaje" class="block text-sm font-medium">Mensaje</label>
+          <textarea id="cMensaje" rows="5" required class="mt-1 w-full border border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="AEn que podemos ayudarte?"></textarea>
+        </div>
+        <div class="md:col-span-2 flex items-center gap-2 text-sm">
+          <input id="cCons" type="checkbox" required class="w-4 h-4 border-slate-300 rounded-md focus:ring-2 focus:ring-brand-500" />
+          <label for="cCons">Acepto recibir novedades y que me contacten por este mensaje.</label>
+        </div>
+        <div class="md:col-span-2">
+          <button type="submit" class="w-full md:w-auto px-6 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Enviar mensaje</button>
+        </div>
+      </form>
+      <div id="contactToast" class="hidden mt-4 p-3 rounded-lg bg-brand-100 text-brand-800 w-fit">AGracias! Te responderemos a la brevedad.</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 border-t border-slate-200" id="terminos">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-2">
+          <img src="img/logo.png" alt="Logo Datainversiones" class="w-10 h-10" style="background:transparent;border-radius:50%;object-fit:contain;" />
+          <span class="font-semibold">Datainversiones.com</span>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Informacion y herramientas con fines educativos e informativos. No constituye asesoramiento financiero ni recomendacion de inversion.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Links</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:text-brand-700" href="#herramientas">Herramientas</a></li>
+          <li><a class="hover:text-brand-700" href="#quees">Que es?</a></li>
+          <li><a class="hover:text-brand-700" href="#contacto">Contacto</a></li>
+          <li><a class="hover:text-brand-700" href="#ingresar">Ingresar</a></li>
+        </ul>
+      </div>
+      <div id="privacidad">
+        <h4 class="font-semibold">Legal</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>Terminos y Condiciones</li>
+          <li>Politica de Privacidad</li>
+          <li>(c) <span id="year"></span> Datainversiones</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Newsletter Modal (Redisenado) -->
+  <div id="newsletterModal" class="fixed inset-0 bg-black bg-opacity-60 z-50 hidden items-center justify-center p-4 transition-opacity duration-300">
+    <div id="newsletterPanel" class="bg-white rounded-2xl shadow-xl max-w-lg w-full relative transform scale-95 transition-transform duration-300 text-center overflow-hidden">
+      
+      <!-- Header con icono -->
+      <div class="bg-brand-50 p-6 border-b border-brand-100">
+        <div class="flex items-center justify-center gap-3">
+          <img src="img/logo.png" alt="Logo Datainversiones" class="w-12 h-12 rounded-full" style="object-fit:contain;background:transparent;" />
+          <span class="font-semibold text-slate-800">Datainversiones<span class="text-brand-600">.com</span></span>
+        </div>
+      </div>
+
+      <!-- Contenido -->
+      <div class="p-8">
+        <!-- Close Button -->
+        <button id="closeModalBtn" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-md">
+          <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+
+        <!-- Form Content -->
+        <div id="formContent">
+          <h3 class="text-2xl md:text-3xl font-bold text-slate-800">AdelAntate al mercado</h3>
+          <p class="mt-2 text-slate-600 max-w-sm mx-auto">Asnete a cientos de inversores que reciben nuestro anAlisis accionable cada semana.</p>
+          
+          <ul class="mt-6 text-left space-y-3 text-slate-700">
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+              <span><strong>Analisis accionables:</strong> Oportunidades claras en bonos y LECAPs.</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+              <span><strong>Contenido exclusivo:</strong> Data y planillas que no compartimos en otro lado.</span>
+            </li>
+          </ul>
+
+          <form id="newsletterForm" class="mt-6 space-y-4">
+            <div>
+              <label for="modalName" class="sr-only">Nombre</label>
+              <input type="text" id="modalName" name="name" required class="mt-1 w-full border text-base border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="Tu nombre">
+            </div>
+            <div>
+              <label for="modalEmail" class="sr-only">Email</label>
+              <input type="email" id="modalEmail" name="email" required class="mt-1 w-full border text-base border-slate-300 rounded-lg p-3 focus:ring-2 focus:ring-brand-500 focus:border-brand-500" placeholder="Tu email">
+            </div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth font-semibold text-base focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Quiero mi ventaja</button>
+          </form>
+          <p class="mt-4 text-xs text-slate-500">100% gratis. Sin spam. Date de baja cuando quieras.</p>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successContent" class="hidden">
+  <div class="flex items-center justify-center gap-3">
+    <img src="img/logo.png" alt="Logo Datainversiones" class="w-12 h-12 rounded-full" style="object-fit:contain;background:transparent;" />
+    <span class="font-semibold text-slate-800">Datainversiones<span class="text-brand-600">.com</span></span>
+  </div>
+  <h3 class="mt-4 text-2xl font-bold text-slate-800">Estas dentro!</h3>
+  <p class="mt-2 text-slate-600">Revisa tu correo para confirmar la suscripcion. Gracias!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="assets/app.js"></script>
+  <!-- Override to improve tooltip + row highlight without breaking existing logic -->
+  <script src="assets/app-override.js"></script>
+  <script>
+    // Lightweight active-nav highlighter for desktop + mobile nav
+    document.addEventListener('DOMContentLoaded', () => {
+      const sectionIds = ['inicio','herramientas','quees','blog','testimonios','contacto'];
+      const desktopNav = document.querySelector('header nav');
+      const mobileNav = document.getElementById('mobileNav');
+      const anchors = Array.from(document.querySelectorAll('header a[href]')).filter(a => a.getAttribute('href')?.includes('#'));
+
+      const byId = new Map();
+      sectionIds.forEach(id => {
+        const matches = anchors.filter(a => {
+          const href = a.getAttribute('href');
+          return href.endsWith('#'+id) || href === '#'+id;
+        });
+        if (matches.length) byId.set(id, matches);
+      });
+
+      function clearActive() {
+        anchors.forEach(a => {
+          a.classList.remove('text-brand-700','underline','bg-brand-50');
+          // keep hover styles as-is
+        });
+      }
+
+      function setActive(id) {
+        clearActive();
+        const nodes = byId.get(id) || [];
+        nodes.forEach(a => {
+          // desktop vs mobile styles
+          if (desktopNav && desktopNav.contains(a)) {
+            a.classList.add('text-brand-700','underline');
+          }
+          if (mobileNav && mobileNav.contains(a)) {
+            a.classList.add('bg-brand-50','text-brand-700');
+          }
+        });
+      }
+
+      // Initial state from hash
+      const initial = (location.hash||'').replace('#','');
+      if (initial && sectionIds.includes(initial)) setActive(initial);
+
+      // Observe sections to update on scroll
+      const obs = new IntersectionObserver(entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a,b) => b.intersectionRatio - a.intersectionRatio);
+        if (visible.length) {
+          const id = visible[0].target.id;
+          if (sectionIds.includes(id)) setActive(id);
+        }
+      }, { root: null, rootMargin: '-30% 0px -60% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) obs.observe(el);
+      });
+
+      // Also update on hashchange
+      window.addEventListener('hashchange', () => {
+        const id = (location.hash||'').replace('#','');
+        if (sectionIds.includes(id)) setActive(id);
+      });
+
+      // Immediate feedback on click
+      anchors.forEach(a => a.addEventListener('click', () => {
+        const href = a.getAttribute('href')||'';
+        const id = href.split('#').pop();
+        if (sectionIds.includes(id)) setActive(id);
+      }));
+    });
+  </script>
+  <script>
+    // --- Logica del Modal de Newsletter (del sitio original) ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('newsletterModal');
+      if (!modal) return; // Si no existe el modal, no seguir.
+      const panel = document.getElementById('newsletterPanel');
+      const openBtn = document.getElementById('openModalBtn');
+      const openBtnMobile = document.getElementById('openModalBtnMobile');
+      const closeBtn = document.getElementById('closeModalBtn');
+      const form = document.getElementById('newsletterForm');
+      const formContent = document.getElementById('formContent');
+      const successContent = document.getElementById('successContent');
+
+      const showModal = () => {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        setTimeout(() => {
+          modal.classList.remove('opacity-0');
+          panel.classList.remove('scale-95');
+        }, 10);
+      };
+
+      const hideModal = () => {
+        modal.classList.add('opacity-0');
+        panel.classList.add('scale-95');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+          if(formContent && successContent && form) {
+            formContent.classList.remove('hidden');
+            successContent.classList.add('hidden');
+            form.reset();
+          }
+        }, 300);
+      };
+
+      openBtn.addEventListener('click', (e) => { e.preventDefault(); showModal(); });
+      openBtnMobile.addEventListener('click', (e) => { e.preventDefault(); showModal(); });
+      closeBtn.addEventListener('click', hideModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) hideModal(); });
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formContent.classList.add('hidden');
+        successContent.classList.remove('hidden');
+        setTimeout(hideModal, 3000);
+      });
+    });
+
+    // --- Logica del sitio original ---
+    document.getElementById('menuBtn')?.addEventListener('click', () => {
+      document.getElementById('mobileNav')?.classList.toggle('hidden');
+    });
+
+    document.getElementById('googleBtn')?.addEventListener('click', () => {
+      const mock = document.getElementById('googleMock');
+      mock.classList.remove('hidden');
+      mock.textContent = '(Demo) Autenticando con Google...';
+      setTimeout(() => mock.textContent = '(Demo) Listo! Usuario autenticado (simulado).', 1200);
+    });
+
+    function submitContact(e) {
+      e.preventDefault();
+      document.getElementById('contactToast')?.classList.remove('hidden');
+      e.target.reset();
+      return false;
+    }
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Logica de las calculadoras simples (del sitio original) ---
+    function calcCurrentYield() {
+      const c = parseFloat(document.getElementById('bondCoupon').value);
+      const p = parseFloat(document.getElementById('bondPrice').value);
+      const out = document.getElementById('bondYieldOut');
+      if (isFinite(c) && isFinite(p) && p > 0) {
+        const y = (c / p) * 100;
+        out.textContent = y.toFixed(2) + ' %';
+      } else {
+        out.textContent = '-';
+      }
+    }
+
+    function calcLecapTNA() {
+      const precio = parseFloat(document.getElementById('lecapPrecio').value);
+      const dias = parseInt(document.getElementById('lecapDias').value, 10);
+      const out = document.getElementById('lecapTnaOut');
+      if (isFinite(precio) && precio > 0 && isFinite(dias) && dias > 0) {
+        const tna = ((100 / precio) - 1) * (365 / dias) * 100;
+        out.textContent = tna.toFixed(2) + ' %';
+      } else {
+        out.textContent = '-';
+      }
+    }
+
+    function calcTEA() {
+      const tna = parseFloat(document.getElementById('convTna').value);
+      const m = parseInt(document.getElementById('convM').value, 10);
+      const out = document.getElementById('teaOut');
+      if (isFinite(tna) && isFinite(m) && m > 0) {
+        const tea = Math.pow(1 + (tna / 100) / m, m) - 1;
+        out.textContent = (tea * 100).toFixed(2) + ' %';
+      } else {
+        out.textContent = '-';
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

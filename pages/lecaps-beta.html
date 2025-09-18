@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LECAPs (beta) - Curva y tabla por TEM/TIR | Datainversiones</title>
+  <meta name="description" content="Panel LECAPs (beta): tabla y curva, TEM 30/360, costos y T+N." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+  <!-- Tailwind + site styles for consistent shell -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'] },
+          colors: {
+            brand: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e' },
+            market: { green:'#16a34a', red:'#dc2626', gold:'#eab308' }
+          },
+          boxShadow: { smooth: '0 10px 30px -15px rgba(2,132,199,0.3)' }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../assets/app.css">
+  <link rel="stylesheet" href="../assets/css/lecaps-beta.css" />
+  <!-- Chart.js only for this page (no SRI to avoid load issues in GH Pages paths) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <link rel="canonical" href="https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html" />\n  <!-- Open Graph / Twitter -->\n  <meta property="og:type" content="website" />\n  <meta property="og:title" content="LECAPs (beta) - Curva y tabla por TEM/TIR" />\n  <meta property="og:description" content="Tabla y curva LECAPs por TEM (30/360), costos y T+N. Filtros, export y validacion de JSON." />\n  <meta property="og:url" content="https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html" />\n  <meta property="og:site_name" content="Datainversiones.com" />\n  <meta property="og:image" content="https://dummyimage.com/1200x630/0284c7/ffffff&text=LECAPs+(beta)" />\n  <meta name="twitter:card" content="summary_large_image" />\n  <meta name="twitter:title" content="LECAPs (beta) - Curva y tabla por TEM/TIR" />\n  <meta name="twitter:description" content="Tabla y curva LECAPs por TEM (30/360), costos y T+N. Filtros, export y validacion de JSON." />\n  <script type="application/ld+json">{\n    "@context": "https://schema.org",\n    "@type": "BreadcrumbList",\n    "itemListElement": [\n      {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mgonzalezg05.github.io/Datainversiones/"},\n      {"@type": "ListItem", "position": 2, "name": "LECAPs (beta)", "item": "https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html"}\n    ]\n  }</script>\n  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="../img/logo.png" type="image/png">
+</head>
+<body class="bg-white text-slate-800 antialiased">
+  <!-- Site header (copied for consistent shell) -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="../index.html#inicio" class="flex items-center gap-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+          <img src="../img/logo.png" alt="Logo Datainversiones" class="w-12 h-12" style="background:transparent;border-radius:50%;object-fit:contain;" />
+          <span class="font-semibold text-lg">Datainversiones<span class="text-brand-600">.com</span></span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="../index.html#herramientas" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Herramientas</a>
+          <a href="../index.html#quees" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Que es?</a>
+          <a href="../index.html#blog" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Blog</a>
+          <a href="../index.html#newsletter" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Newsletter</a>
+          <a href="../index.html#testimonios" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Testimonios</a>
+          <a href="../index.html#contacto" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Contacto</a>
+          <a href="./lecaps-beta.html" aria-current="page" class="text-brand-700 underline hover:text-brand-700 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">LECAPs (beta)</a>
+          <a href="../admin.html" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Panel Admin</a>
+        </nav>
+        <button class="md:hidden inline-flex items-center p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500" id="menuBtn" aria-label="Abrir menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+        </button>
+      </div>
+      <div id="mobileNav" class="md:hidden hidden pb-4">
+        <div class="grid gap-2 text-sm">
+          <a href="../index.html#herramientas" class="px-3 py-2 rounded-lg hover:bg-slate-100">Herramientas</a>
+          <a href="../index.html#quees" class="px-3 py-2 rounded-lg hover:bg-slate-100">Que es?</a>
+          <a href="../index.html#blog" class="px-3 py-2 rounded-lg hover:bg-slate-100">Blog</a>
+          <a href="../index.html#newsletter" class="px-3 py-2 rounded-lg hover:bg-slate-100">Newsletter</a>
+          <a href="../index.html#testimonios" class="px-3 py-2 rounded-lg hover:bg-slate-100">Testimonios</a>
+          <a href="../index.html#contacto" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contacto</a>
+          <a href="./lecaps-beta.html" aria-current="page" class="px-3 py-2 rounded-lg bg-brand-50 text-brand-700">LECAPs (beta)</a>
+          <a href="../admin.html" class="px-3 py-2 rounded-lg bg-brand-600 text-white">Panel Admin</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="lecaps-main lecaps-container" aria-live="polite">
+    <section class="lecaps-panel" aria-labelledby="panel-label">
+      <h2 id="panel-label" class="lecaps-section-title">Datos y ParAmetros</h2>
+      <div class="lecaps-controls">
+        <div class="lecaps-control-group">
+          <label class="lecaps-label" for="lecaps-file">Cargar JSON</label>
+          <input id="lecaps-file" type="file" accept="application/json" aria-describedby="lecaps-file-help" />
+          <div id="lecaps-file-help" class="lecaps-help">ArrastrA y soltA o elegi un archivo .json (ver ejemplo).</div>
+        </div>
+
+        <div class="lecaps-control-group lecaps-grid">
+          <div>
+            <label class="lecaps-label" for="lecaps-tplus">T+N</label>
+            <input id="lecaps-tplus" type="number" min="0" step="1" value="0" />
+          </div>
+          <div>
+            <label class="lecaps-label" for="lecaps-comision">Comision (%)</label>
+            <input id="lecaps-comision" type="number" min="0" step="0.0001" value="0.20" />
+          </div>
+          <div>
+            <label class="lecaps-label" for="lecaps-dmpct">DM (%)</label>
+            <input id="lecaps-dmpct" type="number" min="0" step="0.0001" value="0.05" />
+          </div>
+          <div>
+            <label class="lecaps-label" for="lecaps-dmmonto">DM Monto (por 100)</label>
+            <input id="lecaps-dmmonto" type="number" step="0.01" value="0" />
+          </div>
+          <div class="lecaps-readonly">
+            <span class="lecaps-label">Base</span>
+            <span class="lecaps-badge" title="Convencion 30E/360 europeo">30/360</span>
+          </div>
+        </div>
+
+        <div class="lecaps-actions">
+          <button id="lecaps-recalc" class="lecaps-btn primary" type="button">Recalcular</button>
+          <button id="lecaps-export-json" class="lecaps-btn" type="button">Exportar JSON visible</button>
+          <button id="lecaps-export-csv" class="lecaps-btn" type="button">Exportar CSV visible</button>
+          <a class="lecaps-btn ghost" href="../data/lecaps.sample.json" target="_blank" rel="noopener">Ver JSON de ejemplo</a>
+        </div>
+
+        <div class="lecaps-filters lecaps-grid">
+          <div>
+            <label class="lecaps-switch">
+              <input id="lecaps-filter-stale" type="checkbox" />
+              <span>Ocultar stale</span>
+            </label>
+          </div>
+          <div>
+            <label class="lecaps-label" for="lecaps-filter-dias">Rango de dias al VTO</label>
+            <input id="lecaps-filter-dias" type="range" min="0" max="1000" step="10" value="0" />
+            <div class="lecaps-help"><span id="lecaps-filter-dias-val">>= 0 dias</span></div>
+          </div>
+          <div>
+            <label class="lecaps-label" for="lecaps-filter-mes">Mes de vto</label>
+            <select id="lecaps-filter-mes"></select>
+          </div>
+          <div>
+            <label class="lecaps-label" for="lecaps-filter-src">Fuente de precio</label>
+            <select id="lecaps-filter-src">
+              <option value="AUTO">AUTO (ULTIMO>compra>cierre)</option>
+              <option value="ULTIMO">ULTIMO</option>
+              <option value="COMPRA">COMPRA</option>
+              <option value="CIERRE">CIERRE</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="lecaps-errors" class="lecaps-errors" role="alert" aria-live="assertive" hidden></div>
+      </div>
+    </section>
+
+    <section class="lecaps-table-chart" aria-labelledby="tabla-label">
+      <h2 id="tabla-label" class="lecaps-section-title">Tabla LECAPs</h2>
+      <div class="lecaps-table-wrap" tabindex="0">
+        <table class="lecaps-table" id="lecaps-table">
+          <thead>
+            <tr>
+              <th data-key="ticker" title="Identificador del instrumento">Ticker</th>
+              <th data-key="emision" title="Fecha de emision (inicio)">Emision</th>
+              <th data-key="vencimiento" title="Fecha de vencimiento (fin)">Vencimiento</th>
+              <th data-key="dias" title="Dias calendario desde la liquidacion hasta el vencimiento">Dias</th>
+              <th data-key="tem" title="Tasa Efectiva Mensual (base 30/360)"><abbr title="Tasa Efectiva Mensual (base 30/360)">TEM</abbr></th>
+              <th data-key="FV" title="Valor al Vencimiento por VN 100"><abbr title="Valor al Vencimiento por VN 100">FV</abbr></th>
+              <th data-key="precio_base" title="Precio base seleccionado y su fuente">
+                Precio (<abbr title="Fuente de precio seleccionada (ULTIMO/COMPRA/CIERRE)">src</abbr>)
+              </th>
+              <th data-key="com" title="Porcentaje de comision aplicado al precio base">Comision</th>
+              <th data-key="dm_pct" title="Derechos y gastos de mercado: porcentaje + monto fijo por VN 100"><abbr title="Derechos y gastos de mercado">DM</abbr></th>
+              <th data-key="precio_neto" title="Precio total con costos incluidos (por VN 100)">Precio Neto</th>
+              <th data-key="tir_em" title="Tasa Interna de Retorno efectiva mensual (base 30/360)"><abbr title="Tasa Interna de Retorno efectiva mensual (base 30/360)">TIR_EM</abbr></th>
+              <th data-key="tir_ea" title="Tasa Interna de Retorno efectiva anual (base 360)"><abbr title="Tasa Interna de Retorno efectiva anual (base 360)">TIR_EA</abbr></th>
+              <th data-key="stale" title="Precio desactualizado (>= 1 dia habil sin actualizacion)">Stale</th>
+            </tr>
+          </thead>
+          <tbody id="lecaps-tbody"></tbody>
+        </table>
+      </div>
+
+      <h2 class="lecaps-section-title">Curva LECAPs (TIR vs Dias)</h2>
+      <div class="lecaps-toggle" role="group" aria-label="Seleccionar metrica de curva">
+        <button id="lecaps-metric-ea" class="lecaps-btn-toggle is-active" type="button" aria-pressed="true">TIR_EA</button>
+        <button id="lecaps-metric-em" class="lecaps-btn-toggle" type="button" aria-pressed="false">TIR_EM</button>
+        <label class="lecaps-switch" style="margin-left:.5rem;">
+          <input id="lecaps-trend-toggle" type="checkbox" />
+          <span>Ver tendencia</span>
+        </label>
+      </div>
+      <div id="lecaps-curve-ea-wrap" class="lecaps-chart-card">
+        <canvas id="lecaps-curve" height="220" aria-label="Curva de TIR_EA"></canvas>
+      </div>
+      <div id="lecaps-curve-em-wrap" class="lecaps-chart-card lecaps-hidden">
+        <canvas id="lecaps-curve-em" height="220" aria-label="Curva de TIR_EM"></canvas>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-12 border-t border-slate-200" id="terminos">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-2">
+          <img src="../img/logo.png" alt="Logo Datainversiones" class="w-10 h-10" style="background:transparent;border-radius:50%;object-fit:contain;" />
+          <span class="font-semibold">Datainversiones.com</span>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Informacion y herramientas con fines educativos e informativos. No constituye asesoramiento financiero ni recomendacion de inversion.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Links</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:text-brand-700" href="../index.html#herramientas">Herramientas</a></li>
+          <li><a class="hover:text-brand-700" href="../index.html#quees">Que es?</a></li>
+          <li><a class="hover:text-brand-700" href="../index.html#contacto">Contacto</a></li>
+          <li><a class="hover:text-brand-700" href="../index.html#ingresar">Ingresar</a></li>
+        </ul>
+      </div>
+      <div id="privacidad">
+        <h4 class="font-semibold">Legal</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>Terminos y Condiciones</li>
+          <li>Politica de Privacidad</li>
+          <li>(c) <span id="year"></span> Datainversiones</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle only (no extra site JS to avoid collisions)
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('menuBtn')?.addEventListener('click', () => {
+        document.getElementById('mobileNav')?.classList.toggle('hidden');
+      });
+      const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script src="../assets/js/lecaps-beta.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      if (window.LecapsBeta && typeof window.LecapsBeta.init === 'function') {
+        window.LecapsBeta.init();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+

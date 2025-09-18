@@ -1,0 +1,107 @@
+﻿
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Admin - Datainversiones</title>
+    <link rel="stylesheet" href="assets/app.css">
+  <meta name="robots" content="noindex,nofollow" />
+</head>
+<body>
+
+    <div class="container">
+        <header style="display: flex; justify-content: space-between; align-items: center;">
+            <h1>Panel de Administracion</h1>
+            <a href="index.html" class="btn secondary">Ver Home</a>
+        </header>
+
+        <div id="admin-panel">
+            <div class="card">
+                <h2 id="form-title">Agregar Nuevo Bono</h2>
+                <form id="bond-form">
+                    <input type="hidden" name="id">
+                    <div>
+                        <label for="ticker">Ticker</label>
+                        <input type="text" name="ticker" required>
+                    </div>
+                    <div>
+                        <label for="tipo">Tipo</label>
+                        <select name="tipo">
+                            <option value="LECAP">LECAP</option>
+                            <option value="BONO_FIJO">BONO_FIJO</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="vencimiento">Vencimiento</label>
+                        <input type="date" name="vencimiento" required>
+                    </div>
+                    <div>
+                        <label for="valor_nominal">Valor Nominal</label>
+                        <input type="number" name="valor_nominal" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="precio_limpio">Precio Limpio</label>
+                        <input type="number" name="precio_limpio" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="interes_devengado">Interes Devengado</label>
+                        <input type="number" name="interes_devengado" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="comision_bp">Comision (bp)</label>
+                        <input type="number" name="comision_bp" step="1" required>
+                    </div>
+                    <div>
+                        <label for="fecha_liquidacion">Fecha Liquidacion</label>
+                        <input type="date" name="fecha_liquidacion" required>
+                    </div>
+                     <div>
+                        <label for="fuente_cotizacion">Fuente</label>
+                        <select name="fuente_cotizacion">
+                            <option value="manual">manual</option>
+                            <option value="api">api</option>
+                        </select>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">Guardar Bono</button>
+                        <button type="button" id="cancel-edit" class="btn secondary hidden">Cancelar Edicion</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Bonos Existentes</h2>
+                <div class="controls">
+                    <button id="import-btn" class="btn">Importar JSON</button>
+                    <input type="file" id="import-input" accept=".json" class="hidden">
+                    <button id="export-btn" class="btn secondary">Exportar JSON</button>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table id="admin-bonds-table">
+                        <thead>
+                            <tr>
+                                <th>Ticker</th>
+                                <th>Tipo</th>
+                                <th>Vencimiento</th>
+                                <th>Precio Limpio</th>
+                                <th>Comision (bp)</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admin-bonds-table-body">
+                            <!-- Rows will be injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/app.js"></script>
+</body>
+</html>
+
+
+
+
