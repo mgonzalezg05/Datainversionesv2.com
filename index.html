@@ -554,6 +554,17 @@
     });
   </script>
   <script>
+    // Ensure LECAPs link works on GitHub Pages project path
+    document.addEventListener('DOMContentLoaded', () => {
+      const base = (location.pathname.endsWith('/'))
+        ? location.pathname
+        : location.pathname.replace(/[^/]+$/, '');
+      document.querySelectorAll('a[href="/pages/lecaps-beta.html"], a[href="pages/lecaps-beta.html"]').forEach(a => {
+        a.setAttribute('href', base + 'pages/lecaps-beta.html');
+      });
+    });
+  </script>
+  <script>
     // --- Logica del Modal de Newsletter (del sitio original) ---
     document.addEventListener('DOMContentLoaded', () => {
       const modal = document.getElementById('newsletterModal');
