@@ -13,4 +13,4 @@ Notas
 - Enlace “LECAPs (beta)” agregado en menú desktop y móvil (no se modifican otros ítems).
 - Cálculo: base 30/360 (30E/360), TEM mensual, costos (comisión y DM) y T+N.
 - Gráfico: Chart.js cargado únicamente en la página secundaria; refleja exactamente la vista filtrada.
-- Cargar otro JSON con el botón “Cargar JSON” en LECAPs; validación cliente con errores claros.
+- Cargar otro JSON con el botón “Cargar JSON” en LECAPs; validación en cliente con errores claros.

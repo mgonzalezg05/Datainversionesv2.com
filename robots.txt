@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://mgonzalezg05.github.io/Datainversiones/sitemap.xml
+Sitemap: https://datainversiones.com/sitemap.xml
