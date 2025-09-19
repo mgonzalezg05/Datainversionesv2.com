@@ -16,7 +16,7 @@
   <meta property="og:description" content="Herramientas y calculadoras para el inversor argentino. Analiza el rendimiento de bonos, LECAPs y converti TNA/TEA." />
   <meta property="og:url" content="https://mgonzalezg05.github.io/Datainversiones/" />
   <meta property="og:site_name" content="Datainversiones.com" />
-  <meta property="og:image" content="https://dummyimage.com/1200x630/0284c7/ffffff&text=Datainversiones.com" />
+  <meta property="og:image" content="https://mgonzalezg05.github.io/Datainversiones/img/og-home.svg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="es_AR" />
@@ -25,7 +25,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Datainversiones.com - Calculadoras para bonos argentinos y LECAPs" />
   <meta name="twitter:description" content="Herramientas y calculadoras para el inversor argentino. Analiza el rendimiento de bonos, LECAPs y converti TNA/TEA." />
-  <meta name="twitter:image" content="https://dummyimage.com/1200x630/0284c7/ffffff&text=Datainversiones.com" />
+  <meta name="twitter:image" content="https://mgonzalezg05.github.io/Datainversiones/img/og-home.svg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -157,6 +157,7 @@
           <div class="mt-6 flex flex-wrap gap-3">
             <a href="#herramientas" class="px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Ver Panel Interactivo</a>
             <a href="admin.html" class="px-5 py-3 rounded-xl border border-brand-200 text-brand-700 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Administrar Datos</a>
+            <a href="pages/lecaps-beta.html" class="px-5 py-3 rounded-xl bg-brand-700 text-white hover:bg-brand-800 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">LECAPs (beta)</a>
           </div>
           <div class="mt-6 flex items-center gap-6 text-sm text-slate-500">
             <div class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-market-green"></span> Datos en tiempo real</div>
@@ -188,7 +189,10 @@
     <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl">
         <h2 class="text-3xl md:text-4xl font-extrabold">Panel Interactivo de Bonos y LECAPs</h2>
-        <p class="mt-2 text-slate-600">Analiza, compara y ordena los instrumentos segun tus criterios. Los cambios que hagas en el <a href="admin.html" class="text-brand-600 underline">panel de administracion</a> se reflejaran aqui.</p>
+        <p class="mt-2 text-slate-600">Analiza, compara y ordena los instrumentos segun tus criterios.</p>
+        <div class="mt-4">
+          <a href="pages/lecaps-beta.html" class="inline-block px-5 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Ir a LECAPs (beta)</a>
+        </div>
       </div>
 
       <div class="card mt-10">
@@ -196,16 +200,16 @@
               <table id="bonds-table">
                   <thead>
                       <tr>
-                          <th data-key="ticker">Ticker</th>
-                          <th data-key="vencimiento">Vencimiento</th>
-                          <th data-key="dias_al_vto">Dias/Meses al VTO</th>
-                          <th data-key="precio_limpio">Precio Limpio</th>
-                          <th data-key="interes_devengado">Devengado</th>
-                          <th data-key="comision_bp">Comision</th>
-                          <th data-key="precio_sucio">Precio Sucio</th>
-                          <th data-key="rendimiento_vto">Rend. VTO</th>
-                          <th data-key="tem">TEM</th>
-                          <th data-key="tea">TEA</th>
+                          <th scope="col" data-key="ticker">Ticker</th>
+                          <th scope="col" data-key="vencimiento">Vencimiento</th>
+                          <th scope="col" data-key="dias_al_vto">Dias/Meses al VTO</th>
+                          <th scope="col" data-key="precio_limpio">Precio Limpio</th>
+                          <th scope="col" data-key="interes_devengado">Devengado</th>
+                          <th scope="col" data-key="comision_bp">Comision</th>
+                          <th scope="col" data-key="precio_sucio">Precio Sucio</th>
+                          <th scope="col" data-key="rendimiento_vto">Rend. VTO</th>
+                          <th scope="col" data-key="tem">TEM</th>
+                          <th scope="col" data-key="tea">TEA</th>
                       </tr>
                   </thead>
                   <tbody id="bonds-table-body">
@@ -673,6 +677,9 @@
   </script>
 </body>
 </html>
+
+
+
 
 
 

@@ -3,13 +3,13 @@
 .lecaps-header { position: sticky; top:0; z-index:10; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid #e2e8f0; }
 .lecaps-header-row { display:flex; align-items:center; justify-content:space-between; gap:1rem; min-height:64px; }
 .lecaps-breadcrumb { color:#0284c7; text-decoration:none; font-weight:500; }
-.lecaps-title { font-size: clamp(1.5rem, 2.5vw, 2rem); font-weight:800; letter-spacing:-0.01em; }
+.lecaps-title { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight:800; letter-spacing:-0.01em; }
 .lecaps-beta { color:#0369a1; font-weight:700; font-size:0.9em; padding:0.2em 0.5em; border-radius:0.5rem; background:#e0f2fe; }
 .lecaps-subtitle { margin-top:.25rem; color:#475569; }
 
 .lecaps-main { display:flex; flex-direction:column; gap:2rem; padding-top:1rem; }
 .lecaps-panel { background:#ffffff; border:1px solid #e2e8f0; border-radius:1rem; padding:1rem; box-shadow: 0 10px 30px -15px rgba(2,132,199,0.15); }
-.lecaps-section-title { font-size:1.25rem; font-weight:700; margin: .25rem 0 1rem; color:#0c4a6e; }
+.lecaps-section-title { font-size:1.5rem; font-weight:800; margin: .25rem 0 1rem; color:#0c4a6e; }
 
 .lecaps-controls { display:flex; flex-direction:column; gap:1rem; }
 .lecaps-control-group { display:flex; flex-direction:column; gap:.35rem; }
@@ -58,3 +58,7 @@
 @media (max-width: 560px) {
   .lecaps-grid { grid-template-columns: 1fr; }
 }
+
+/* Match home chart container sizing */
+.lecaps-chart-container { position: relative; height: 400px; width: 100%; }
+

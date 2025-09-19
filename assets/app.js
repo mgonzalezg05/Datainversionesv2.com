@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
             importBtn: document.getElementById('import-btn'),
             importInput: document.getElementById('import-input'),
             exportBtn: document.getElementById('export-btn'),
+
+            // LECAPs admin (nuevos)
+            lecapsImport: document.getElementById('lecaps-import-input'),
+            lecapsStatus: document.getElementById('lecaps-status'),
+            lecapsErrors: document.getElementById('lecaps-errors'),
+            lecapsClear: document.getElementById('lecaps-clear')
         },
         init() {
             if (document.getElementById('chart-container')) {
@@ -216,13 +222,79 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         // --- ADMIN PAGE ---
-        async initAdminPage() {
+        async initAdminPage() {\n            this.initLecapsAdmin();
             await this.loadBonds();
             this.renderAdminTable();
             this.addAdminEventListeners();
         },
 
-        renderAdminTable() {
+        renderAdminTable() {\n        initLecapsAdmin() {
+            const S = this.elements;
+            const updateStatus = () => {
+                const raw = localStorage.getItem('lecapsData');
+                if (!raw) { S.lecapsStatus.textContent = 'Sin datos locales de LECAPs.'; return; }
+                try {
+                    const data = JSON.parse(raw);
+                    const v = this.validateLecaps(data);
+                    if (v.ok) {
+                        const items = (data.items||[]).length;
+                        S.lecapsStatus.textContent = LECAPs local cargado: version=, items=;
+                        S.lecapsErrors.classList.add('hidden');
+                        S.lecapsErrors.textContent = '';
+                    } else {
+                        S.lecapsStatus.textContent = 'LECAPs local invalido.';
+                        S.lecapsErrors.classList.remove('hidden');
+                        S.lecapsErrors.innerHTML = v.errors.map(e=>- ).join('<br>');
+                    }
+                } catch { S.lecapsStatus.textContent = 'LECAPs local corrupto.'; }
+            };
+            updateStatus();
+            if (S.lecapsImport) {
+                S.lecapsImport.addEventListener('change', (e)=>{
+                    const f = e.target.files && e.target.files[0];
+                    if (!f) return;
+                    const rd = new FileReader();
+                    rd.onload = () => {
+                        try {
+                            const data = JSON.parse(rd.result);
+                            const v = this.validateLecaps(data);
+                            if (!v.ok) {
+                                S.lecapsErrors.classList.remove('hidden');
+                                S.lecapsErrors.innerHTML = v.errors.map(e=>- ).join('<br>');
+                                return;
+                            }
+                            localStorage.setItem('lecapsData', JSON.stringify(data));
+                            updateStatus();
+                            alert('LECAPs cargado en localStorage. Abrir pages/lecaps-beta.html para ver los cambios.');
+                        } catch(err){
+                            S.lecapsErrors.classList.remove('hidden');
+                            S.lecapsErrors.textContent = 'JSON invalido: ' + err.message;
+                        }
+                    };
+                    rd.readAsText(f);
+                });
+            }
+            if (S.lecapsClear) {
+                S.lecapsClear.addEventListener('click', ()=>{
+                    localStorage.removeItem('lecapsData');
+                    updateStatus();
+                });
+            }
+        },
+
+        validateLecaps(data){
+            const errors = [];
+            if (!data || typeof data !== 'object') errors.push('Raiz debe ser objeto');
+            if (!data.version || typeof data.version !== 'string') errors.push('Falta version (lecaps.v1)');
+            if (!data.updated_at) errors.push('Falta updated_at');
+            if (!data.params || typeof data.params !== 'object') errors.push('Falta params');
+            if (!Array.isArray(data.items)) errors.push('items debe ser lista');
+            (data.items||[]).forEach((it, idx)=>{
+                if (!it || typeof it !== 'object') { errors.push(item[] invalido); return; }
+                ['ticker','emision','vencimiento','tem'].forEach(k=>{ if (it[k]==null) errors.push(item[]. requerido); });
+            });
+            return { ok: errors.length===0, errors };
+        },
             if (!this.elements.adminTableBody) return;
             this.sortBonds();
             this.elements.adminTableBody.innerHTML = this.state.bonds.map(bond => `
@@ -354,6 +426,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.App = App;
     App.init();
 });
+
+
+
 
 
 

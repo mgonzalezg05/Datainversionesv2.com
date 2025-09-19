@@ -16,8 +16,8 @@
             <a href="index.html" class="btn secondary">Ver Home</a>
         </header>
 
-        <div id="admin-panel">
-            <div class="card">
+    <div id="admin-panel">
+        <div class="card">
                 <h2 id="form-title">Agregar Nuevo Bono</h2>
                 <form id="bond-form">
                     <input type="hidden" name="id">
@@ -96,9 +96,43 @@
                 </div>
             </div>
         </div>
+
+        <div class="card">
+            <h2>LECAPs - Cargar datos (JSON)</h2>
+            <p>Solo administradores. Este JSON reemplaza los datos locales usados por la pagina LECAPs (beta).</p>
+            <div class="controls">
+                <input type="file" id="lecaps-import-input" accept="application/json" />
+                <button class="btn secondary" id="lecaps-clear">Borrar LECAPs local</button>
+            </div>
+            <div id="lecaps-status" class="mt-2" style="font-size:14px;color:#555;">Sin datos locales de LECAPs.</div>
+            <div id="lecaps-errors" class="hidden" style="margin-top:8px;color:#b91c1c;background:#fee2e2;padding:8px;border-radius:6px;"></div>
+        </div>
     </div>
 
-    <script src="assets/app.js"></script>
+  <script src="assets/app.js"></script>
+  <script>
+    // LECAPs admin: carga JSON y estado
+    (function(){
+      const S = {
+        import: document.getElementById('lecaps-import-input'),
+        status: document.getElementById('lecaps-status'),
+        errors: document.getElementById('lecaps-errors'),
+        clear: document.getElementById('lecaps-clear')
+      };
+      function sanitize(raw){
+        try{ const d = JSON.parse(JSON.stringify(raw)); const num=v=> (typeof v==='string'&&v.trim()!==''?Number(v):v);
+          d.params = d.params||{}; d.params.t_plus=num(d.params.t_plus); d.params.comision_pct=num(d.params.comision_pct); d.params.dm_pct=num(d.params.dm_pct); d.params.dm_monto=num(d.params.dm_monto);
+          (d.items||[]).forEach(it=>{ it.tem=num(it.tem); it.precios=it.precios||{}; it.precios.ultimo=num(it.precios.ultimo); it.precios.compra=num(it.precios.compra); it.precios.cierre=num(it.precios.cierre);
+            it.overrides=it.overrides||{}; it.overrides.comision_pct=num(it.overrides.comision_pct); it.overrides.dm_pct=num(it.overrides.dm_pct); it.overrides.dm_monto=num(it.overrides.dm_monto); it.overrides.t_plus=(it.overrides.t_plus===''?null:num(it.overrides.t_plus)); });
+          return d; } catch { return raw; }
+      }
+      function validate(d){ const errs=[]; if(!d||typeof d!=='object') errs.push('Raiz debe ser objeto'); if(!d.version) errs.push('Falta version'); if(!d.updated_at) errs.push('Falta updated_at'); if(!Array.isArray(d.items)) errs.push('items debe ser lista'); (d.items||[]).forEach((it,i)=>{ ['ticker','emision','vencimiento','tem'].forEach(k=>{ if(it[k]==null) errs.push(`item[${i}].${k} requerido`); }); }); return {ok:errs.length===0, errors:errs}; }
+      function updateStatus(){ const raw = localStorage.getItem('lecapsData'); if(!raw){ S.status.textContent='Sin datos locales de LECAPs.'; return; } try{ const data=JSON.parse(raw); const v=validate(data); if(v.ok){ S.status.textContent=`LECAPs local cargado: version=${data.version||'-'}, items=${(data.items||[]).length}`; S.errors.classList.add('hidden'); S.errors.textContent=''; } else { S.status.textContent='LECAPs local invalido.'; S.errors.classList.remove('hidden'); S.errors.innerHTML=v.errors.map(e=>'- '+e).join('<br>'); } } catch{ S.status.textContent='LECAPs local corrupto.'; } }
+      updateStatus();
+      if(S.import){ S.import.addEventListener('change',(e)=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=()=>{ try{ const data=sanitize(JSON.parse(rd.result)); const v=validate(data); if(!v.ok){ S.errors.classList.remove('hidden'); S.errors.innerHTML=v.errors.map(e=>'- '+e).join('<br>'); return; } localStorage.setItem('lecapsData', JSON.stringify(data)); updateStatus(); alert('LECAPs cargado. Abrir pages/lecaps-beta.html para ver los cambios.'); }catch(err){ S.errors.classList.remove('hidden'); S.errors.textContent='JSON invalido: '+err.message; } }; rd.readAsText(f); }); }
+      if(S.clear){ S.clear.addEventListener('click', ()=>{ localStorage.removeItem('lecapsData'); updateStatus(); }); }
+    })();
+  </script>
 </body>
 </html>
 

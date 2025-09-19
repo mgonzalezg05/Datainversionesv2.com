@@ -10,7 +10,9 @@
       showTrend: false,
       charts: { ea: null, em: null },
       highlightTicker: null,
-      hoverTicker: null
+      hoverTicker: null,
+      userComPct: null,
+      quoteMode: 'CI'
     },
 
     init(){
@@ -21,20 +23,6 @@
 
     cacheEls(){
       this.els = {
-        file: document.getElementById('lecaps-file'),
-        tplus: document.getElementById('lecaps-tplus'),
-        comision: document.getElementById('lecaps-comision'),
-        dmpct: document.getElementById('lecaps-dmpct'),
-        dmmonto: document.getElementById('lecaps-dmmonto'),
-        recalc: document.getElementById('lecaps-recalc'),
-        expJson: document.getElementById('lecaps-export-json'),
-        expCsv: document.getElementById('lecaps-export-csv'),
-        filterStale: document.getElementById('lecaps-filter-stale'),
-        filterDias: document.getElementById('lecaps-filter-dias'),
-        filterDiasVal: document.getElementById('lecaps-filter-dias-val'),
-        filterMes: document.getElementById('lecaps-filter-mes'),
-        filterSrc: document.getElementById('lecaps-filter-src'),
-        errors: document.getElementById('lecaps-errors'),
         tbody: document.getElementById('lecaps-tbody'),
         curve: document.getElementById('lecaps-curve'),
         curveEm: document.getElementById('lecaps-curve-em'),
@@ -42,49 +30,19 @@
         curveWrapEM: document.getElementById('lecaps-curve-em-wrap'),
         metricEA: document.getElementById('lecaps-metric-ea'),
         metricEM: document.getElementById('lecaps-metric-em'),
-        trendToggle: document.getElementById('lecaps-trend-toggle')
+        trendToggle: document.getElementById('lecaps-trend-toggle'),
+        userCommission: document.getElementById('lecaps-user-commission'),
+        quoteCI: document.getElementById('lecaps-quote-ci'),
+        quote24h: document.getElementById('lecaps-quote-24h')
       };
     },
 
     bindEvents(){
-      const onParams = () => {
-        this.setParams({
-          t_plus: parseInt(this.els.tplus.value || '0', 10),
-          comision_pct: (parseFloat(this.els.comision.value || '0') / 100) || 0,
-          dm_pct: (parseFloat(this.els.dmpct.value || '0') / 100) || 0,
-          dm_monto: parseFloat(this.els.dmmonto.value || '0') || 0
-        });
-      };
+      // no parametros editables en esta pagina
 
-      this.els.tplus.addEventListener('input', onParams);
-      this.els.comision.addEventListener('input', onParams);
-      this.els.dmpct.addEventListener('input', onParams);
-      this.els.dmmonto.addEventListener('input', onParams);
-      this.els.recalc.addEventListener('click', () => this.compute());
+      // sin filtros en esta pagina
 
-      this.els.file.addEventListener('change', (e) => {
-        const f = e.target.files && e.target.files[0];
-        if (f) this.loadJSON(f);
-      });
-
-      // drag & drop
-      document.addEventListener('dragover', (e)=>{ e.preventDefault(); });
-      document.addEventListener('drop', (e)=>{
-        if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) {
-          e.preventDefault();
-          this.loadJSON(e.dataTransfer.files[0]);
-        }
-      });
-
-      // filters
-      this.els.filterStale.addEventListener('change', ()=>{ this.state.filter.hideStale = !!this.els.filterStale.checked; this.render(); });
-      this.els.filterDias.addEventListener('input', ()=>{ this.state.filter.minDias = parseInt(this.els.filterDias.value||'0',10); this.els.filterDiasVal.textContent = `>= ${this.state.filter.minDias} dias`; this.render(); });
-      this.els.filterMes.addEventListener('change', ()=>{ this.state.filter.mesVto = this.els.filterMes.value || 'ALL'; this.render(); });
-      this.els.filterSrc.addEventListener('change', ()=>{ this.state.filter.src = this.els.filterSrc.value || 'AUTO'; this.compute(); });
-
-      // export
-      this.els.expJson.addEventListener('click', ()=> this.exportVisible('json'));
-      this.els.expCsv.addEventListener('click', ()=> this.exportVisible('csv'));
+      // export se puede invocar por consola si fuera necesario
 
       // clear persistent highlight when clicking anywhere outside the charts
       document.addEventListener('click', (e)=>{
@@ -109,6 +67,31 @@
       this.els.metricEA.addEventListener('click', ()=> setMetric('EA'));
       this.els.metricEM.addEventListener('click', ()=> setMetric('EM'));
       setMetric('EA');
+
+      // user commission override
+      if (this.els.userCommission) {
+        this.els.userCommission.addEventListener('input', ()=>{
+          const raw = (this.els.userCommission.value||'').toString().replace(',', '.');
+          const v = parseFloat(raw);
+          this.state.userComPct = isFinite(v) ? (v/100) : null;
+          this.compute();
+        });
+      }
+
+      // quote mode toggle (CI / 24 hs)
+      const setQuote = (mode)=>{
+        this.state.quoteMode = mode;
+        if (this.els.quoteCI && this.els.quote24h) {
+          this.els.quoteCI.classList.toggle('is-active', mode==='CI');
+          this.els.quote24h.classList.toggle('is-active', mode==='24HS');
+          this.els.quoteCI.setAttribute('aria-pressed', mode==='CI' ? 'true':'false');
+          this.els.quote24h.setAttribute('aria-pressed', mode==='24HS' ? 'true':'false');
+        }
+        this.render();
+      };
+      if (this.els.quoteCI) this.els.quoteCI.addEventListener('click', ()=> setQuote('CI'));
+      if (this.els.quote24h) this.els.quote24h.addEventListener('click', ()=> setQuote('24HS'));
+      setQuote('CI');
 
       // trend toggle
       if (this.els.trendToggle) {
@@ -138,33 +121,30 @@
 
     async loadSampleFallback(){
       try {
+        // Prefer localStorage override if available (set from Admin panel)
+        const stored = localStorage.getItem('lecapsData');
+        if (stored) {
+          try {
+            const dataLS = this.sanitize(JSON.parse(stored));
+            const v = this.validate(dataLS);
+            if (v.ok) {
+              this.state.raw = dataLS;
+              this.applyParamsFromData(dataLS);
+              this.compute();
+              return;
+            }
+          } catch (_) { /* ignore */ }
+        }
+        // Fallback to sample file
         const res = await fetch('../data/lecaps.sample.json', { cache: 'no-store' });
-        if (!res.ok) return; // silently skip if not present
-        const data = await res.json();
+        if (!res.ok) return;
+        const data = this.sanitize(await res.json());
         const { ok, errors } = this.validate(data);
         if (!ok) { this.showErrors(errors); return; }
         this.state.raw = data;
         this.applyParamsFromData(data);
         this.compute();
       } catch (_) { /* ignore offline */ }
-    },
-
-    loadJSON(file){
-      const reader = new FileReader();
-      reader.onload = () => {
-        try {
-          const data = JSON.parse(reader.result);
-          const { ok, errors } = this.validate(data);
-          if (!ok) { this.showErrors(errors); return; }
-          this.clearErrors();
-          this.state.raw = data;
-          this.applyParamsFromData(data);
-          this.compute();
-        } catch (err) {
-          this.showErrors([`JSON invalido: ${err.message}`]);
-        }
-      };
-      reader.readAsText(file);
     },
 
     validate(data){
@@ -194,6 +174,31 @@
       return { ok: errors.length===0, errors };
     },
 
+    sanitize(raw){
+      try {
+        const data = JSON.parse(JSON.stringify(raw));
+        const num = (v)=> (typeof v==='string' && v.trim()!=='' ? Number(v) : v);
+        data.params = data.params || {};
+        data.params.t_plus = num(data.params.t_plus);
+        data.params.comision_pct = num(data.params.comision_pct);
+        data.params.dm_pct = num(data.params.dm_pct);
+        data.params.dm_monto = num(data.params.dm_monto);
+        (data.items||[]).forEach(it=>{
+          it.tem = num(it.tem);
+          it.precios = it.precios || {};
+          it.precios.ultimo = num(it.precios.ultimo);
+          it.precios.compra = num(it.precios.compra);
+          it.precios.cierre = num(it.precios.cierre);
+          it.overrides = it.overrides || {};
+          it.overrides.comision_pct = num(it.overrides.comision_pct);
+          it.overrides.dm_pct = num(it.overrides.dm_pct);
+          it.overrides.dm_monto = num(it.overrides.dm_monto);
+          it.overrides.t_plus = (it.overrides.t_plus===''? null : num(it.overrides.t_plus));
+        });
+        return data;
+      } catch { return raw; }
+    },
+
     applyParamsFromData(data){
       const p = data.params || {};
       // Force base 30_360 as per spec (ignore ACT_365)
@@ -203,11 +208,11 @@
       this.state.params.dm_pct = typeof p.dm_pct==='number' ? p.dm_pct : 0;
       this.state.params.dm_monto = typeof p.dm_monto==='number' ? p.dm_monto : 0;
 
-      // Reflect into UI (percent fields in %)
-      this.els.tplus.value = String(this.state.params.t_plus);
-      this.els.comision.value = (this.state.params.comision_pct*100).toFixed(2);
-      this.els.dmpct.value = (this.state.params.dm_pct*100).toFixed(2);
-      this.els.dmmonto.value = String(this.state.params.dm_monto);
+      // Reflect into UI if inputs exist (page may be read-only)
+      if (this.els.tplus) this.els.tplus.value = String(this.state.params.t_plus);
+      if (this.els.comision) this.els.comision.value = (this.state.params.comision_pct*100).toFixed(2);
+      if (this.els.dmpct) this.els.dmpct.value = (this.state.params.dm_pct*100).toFixed(2);
+      if (this.els.dmmonto) this.els.dmmonto.value = String(this.state.params.dm_monto);
     },
 
     setParams(patch){
@@ -237,9 +242,10 @@
         const srcPref = this.state.filter.src;
         const pick = (srcPref==='AUTO') ? this.pickPrecioAuto(precios) : this.pickPrecioFor(srcPref, precios);
         const precio_base = pick.valor;
-        const fuente_precio = pick.src;
+        const fuente_precio = this.state.quoteMode; // display label (CI o 24HS)
 
-        const com = (ovr.comision_pct!=null) ? ovr.comision_pct : (this.state.params.comision_pct||0);
+        let comBase = (ovr.comision_pct!=null) ? ovr.comision_pct : (this.state.params.comision_pct||0);
+        const com = (this.state.userComPct!=null) ? this.state.userComPct : comBase;
         const dm_pct = (ovr.dm_pct!=null) ? ovr.dm_pct : (this.state.params.dm_pct||0);
         const dm_monto = (ovr.dm_monto!=null) ? ovr.dm_monto : (this.state.params.dm_monto||0);
 
@@ -273,7 +279,6 @@
       }).filter(r => r.valid);
 
       this.state.items = items;
-      this.populateMesFilter(items);
       this.render();
     },
 
@@ -316,14 +321,11 @@
         if (this.state.highlightTicker === r.ticker || this.state.hoverTicker === r.ticker) tr.classList.add('lecaps-row-highlight');
         tr.innerHTML = [
           this.esc(r.ticker),
-          this.esc(r.emision),
           this.esc(r.vencimiento),
           this.num(r.dias,0),
           this.pct(r.tem, 3),
           this.num(r.FV,2),
           `${this.num(r.precio_base,2)} (${this.esc(r.fuente_precio)})`,
-          this.pct(r.com,2),
-          `${this.pct(r.dm_pct,2)} + ${this.num(r.dm_monto,2)}`,
           this.num(r.precio_neto,2),
           this.pct(r.tir_em,2),
           this.pct(r.tir_ea,2),
@@ -352,8 +354,8 @@
         x: r.dias,
         y: (r.tir_ea||0)*100,
         r: top3.includes(r.ticker) ? 6 : 4,
-        backgroundColor: r.stale ? 'rgba(234,179,8,0.5)' : 'rgba(2,132,199,0.5)',
-        borderColor: top3.includes(r.ticker) ? 'rgba(5,150,105,1)' : 'rgba(2,132,199,1)',
+        backgroundColor: 'rgba(13,110,253,0.6)',
+        borderColor: 'rgba(13,110,253,1)',
         ticker: r.ticker,
         stale: r.stale,
         fuente: r.fuente_precio,
@@ -366,7 +368,7 @@
         type: 'scatter',
         data: { datasets: [
           { label: 'TIR_EA (%)', data: dataPoints, parsing: false, pointRadius: (ctx)=> ctx.raw?.r || 4 },
-          trend.length ? { type: 'line', label: 'Tendencia', data: trend, parsing: false, borderColor: 'rgba(2,132,199,0.6)', borderWidth: 2, pointRadius: 0, tension: 0, borderDash: [6,4] } : null
+          trend.length ? { type: 'line', label: 'Tendencia', data: trend, parsing: false, borderColor: 'rgba(108,117,125,0.85)', borderWidth: 2, pointRadius: 0, tension: 0.35, borderDash: [6,4] } : null
         ].filter(Boolean) },
         options: {
           responsive: true,
@@ -428,8 +430,8 @@
         x: r.dias,
         y: (r.tir_em||0)*100,
         r: top3.includes(r.ticker) ? 6 : 4,
-        backgroundColor: r.stale ? 'rgba(234,179,8,0.5)' : 'rgba(2,132,199,0.5)',
-        borderColor: top3.includes(r.ticker) ? 'rgba(5,150,105,1)' : 'rgba(2,132,199,1)',
+        backgroundColor: 'rgba(13,110,253,0.6)',
+        borderColor: 'rgba(13,110,253,1)',
         ticker: r.ticker,
         stale: r.stale,
         fuente: r.fuente_precio,
@@ -442,7 +444,7 @@
         type: 'scatter',
         data: { datasets: [
           { label: 'TIR_EM (%)', data: dataPoints, parsing: false, pointRadius: (ctx)=> ctx.raw?.r || 4 },
-          trend.length ? { type: 'line', label: 'Tendencia', data: trend, parsing: false, borderColor: 'rgba(3,105,161,0.6)', borderWidth: 2, pointRadius: 0, tension: 0, borderDash: [6,4] } : null
+          trend.length ? { type: 'line', label: 'Tendencia', data: trend, parsing: false, borderColor: 'rgba(108,117,125,0.85)', borderWidth: 2, pointRadius: 0, tension: 0.35, borderDash: [6,4] } : null
         ].filter(Boolean) },
         options: {
           responsive: true,
@@ -504,18 +506,15 @@
         const cells = tr.querySelectorAll('td');
         return {
           ticker: cells[0]?.textContent || '',
-          emision: cells[1]?.textContent || '',
-          vencimiento: cells[2]?.textContent || '',
-          dias: cells[3]?.textContent || '',
-          tem: cells[4]?.textContent || '',
-          fv: cells[5]?.textContent || '',
-          precio_src: cells[6]?.textContent || '',
-          comision: cells[7]?.textContent || '',
-          dm: cells[8]?.textContent || '',
-          precio_neto: cells[9]?.textContent || '',
-          tir_em: cells[10]?.textContent || '',
-          tir_ea: cells[11]?.textContent || '',
-          stale: cells[12]?.textContent || ''
+          vencimiento: cells[1]?.textContent || '',
+          dias: cells[2]?.textContent || '',
+          tem: cells[3]?.textContent || '',
+          fv: cells[4]?.textContent || '',
+          precio_src: cells[5]?.textContent || '',
+          precio_neto: cells[6]?.textContent || '',
+          tir_em: cells[7]?.textContent || '',
+          tir_ea: cells[8]?.textContent || '',
+          stale: cells[9]?.textContent || ''
         };
       });
 
@@ -532,10 +531,14 @@
 
     // Helpers
     showErrors(msgs){
-      this.els.errors.hidden = false;
-      this.els.errors.innerHTML = msgs.map(m=> `<div>- ${this.esc(m)}</div>`).join('');
+      if (this.els && this.els.errors) {
+        this.els.errors.hidden = false;
+        this.els.errors.innerHTML = msgs.map(m=> `<div>- ${this.esc(m)}</div>`).join('');
+      } else {
+        console.warn('LECAPs validation errors:', msgs);
+      }
     },
-    clearErrors(){ this.els.errors.hidden = true; this.els.errors.textContent = ''; },
+    clearErrors(){ if (this.els && this.els.errors){ this.els.errors.hidden = true; this.els.errors.textContent = ''; } },
     download(blob, filename){
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
