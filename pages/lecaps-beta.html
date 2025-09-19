@@ -26,11 +26,11 @@
     }
   </script>
   <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../assets/app.css">
-  <link rel="stylesheet" href="../assets/css/lecaps-beta.css" />
+  <link rel="stylesheet" href="../assets/app.css?v=1">
+  <link rel="stylesheet" href="../assets/css/lecaps-beta.css?v=1" />
   <!-- Chart.js only for this page (no SRI to avoid load issues in GH Pages paths) -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-  <link rel="canonical" href="https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html" />\n  <!-- Open Graph / Twitter -->\n  <meta property="og:type" content="website" />\n  <meta property="og:title" content="LECAPs (beta) - Curva y tabla por TEM/TIR" />\n  <meta property="og:description" content="Tabla y curva LECAPs por TEM (30/360), costos y T+N. Filtros, export y validacion de JSON." />\n  <meta property="og:url" content="https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html" />\n  <meta property="og:site_name" content="Datainversiones.com" />\n  <meta property="og:image" content="https://mgonzalezg05.github.io/Datainversiones/img/og-lecaps.svg" />\n  <meta name="twitter:card" content="summary_large_image" />\n  <meta name="twitter:title" content="LECAPs (beta) - Curva y tabla por TEM/TIR" />\n  <meta name="twitter:description" content="Tabla y curva LECAPs por TEM (30/360), costos y T+N. Filtros, export y validacion de JSON." />\n  <script type="application/ld+json">{\n    "@context": "https://schema.org",\n    "@type": "BreadcrumbList",\n    "itemListElement": [\n      {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mgonzalezg05.github.io/Datainversiones/"},\n      {"@type": "ListItem", "position": 2, "name": "LECAPs (beta)", "item": "https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html"}\n    ]\n  }</script>\n  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html" />\n  <!-- Open Graph / Twitter -->\n  <meta property="og:type" content="website" />\n  <meta property="og:title" content="LECAPs (beta) - Curva y tabla por TEM/TIR" />\n  <meta property="og:description" content="Tabla y curva LECAPs por TEM (30/360), costos y T+N. Filtros, export y validacion de JSON." />\n  <meta property="og:url" content="https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html" />\n  <meta property="og:site_name" content="Datainversiones.com" />\n  <meta property="og:image" content="https://mgonzalezg05.github.io/Datainversiones/img/logo.png" />\n  <meta name="twitter:card" content="summary_large_image" />\n  <meta name="twitter:title" content="LECAPs (beta) - Curva y tabla por TEM/TIR" />\n  <meta name="twitter:description" content="Tabla y curva LECAPs por TEM (30/360), costos y T+N. Filtros, export y validacion de JSON." />\n  <script type="application/ld+json">{\n    "@context": "https://schema.org",\n    "@type": "BreadcrumbList",\n    "itemListElement": [\n      {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mgonzalezg05.github.io/Datainversiones/"},\n      {"@type": "ListItem", "position": 2, "name": "LECAPs (beta)", "item": "https://mgonzalezg05.github.io/Datainversiones/pages/lecaps-beta.html"}\n    ]\n  }</script>\n  <meta name="robots" content="index,follow" />
   <link rel="icon" href="../img/logo.png" type="image/png">
 </head>
 <body class="bg-white text-slate-800 antialiased">
@@ -50,6 +50,7 @@
           <a href="../index.html#testimonios" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Testimonios</a>
           <a href="../index.html#contacto" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Contacto</a>
           <a href="./lecaps-beta.html" aria-current="page" class="text-brand-700 underline hover:text-brand-700 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">LECAPs (beta)</a>
+          <a href="./hard-beta.html" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Bonos USD (beta)</a>
           <a href="../admin.html" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Panel Admin</a>
         </nav>
         <button class="md:hidden inline-flex items-center p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500" id="menuBtn" aria-label="Abrir menu">
@@ -65,6 +66,7 @@
           <a href="../index.html#testimonios" class="px-3 py-2 rounded-lg hover:bg-slate-100">Testimonios</a>
           <a href="../index.html#contacto" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contacto</a>
           <a href="./lecaps-beta.html" aria-current="page" class="px-3 py-2 rounded-lg bg-brand-50 text-brand-700">LECAPs (beta)</a>
+          <a href="./hard-beta.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">Bonos USD (beta)</a>
           <a href="../admin.html" class="px-3 py-2 rounded-lg bg-brand-600 text-white">Panel Admin</a>
         </div>
       </div>
@@ -172,7 +174,7 @@
       const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
     });
   </script>
-  <script src="../assets/js/lecaps-beta.js"></script>
+  <script src="../assets/js/lecaps-beta.js?v=1"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function(){
       if (window.LecapsBeta && typeof window.LecapsBeta.init === 'function') {
@@ -182,6 +184,11 @@
   </script>
 </body>
 </html>
+
+
+
+
+
 
 
 

@@ -17,7 +17,25 @@
 
     init(){
       this.cacheEls();
+      // restore user prefs (commission %, quote mode)
+      try {
+        const savedCom = localStorage.getItem('lecapsUserCommission');
+        if (savedCom != null && this.els.userCommission) {
+          const pct = parseFloat(savedCom);
+          if (isFinite(pct)) {
+            this.els.userCommission.value = pct.toFixed(2);
+            this.state.userComPct = pct/100;
+          }
+        }
+        const savedQuote = localStorage.getItem('lecapsQuoteMode');
+        if (savedQuote === 'CI' || savedQuote === '24HS') {
+          this.state.quoteMode = savedQuote;
+        }
+      } catch(_){ }
       this.bindEvents();
+      if (this.state.quoteMode === '24HS' && this.els.quote24h) {
+        this.els.quote24h.click();
+      }
       this.loadSampleFallback();
     },
 
@@ -75,6 +93,7 @@
           const v = parseFloat(raw);
           this.state.userComPct = isFinite(v) ? (v/100) : null;
           this.compute();
+          try { if (isFinite(v)) localStorage.setItem('lecapsUserCommission', v.toFixed(2)); } catch(_){ }
         });
       }
 
@@ -89,8 +108,8 @@
         }
         this.render();
       };
-      if (this.els.quoteCI) this.els.quoteCI.addEventListener('click', ()=> setQuote('CI'));
-      if (this.els.quote24h) this.els.quote24h.addEventListener('click', ()=> setQuote('24HS'));
+      if (this.els.quoteCI) this.els.quoteCI.addEventListener('click', ()=> { setQuote('CI'); try { localStorage.setItem('lecapsQuoteMode','CI'); } catch(_){ } });
+      if (this.els.quote24h) this.els.quote24h.addEventListener('click', ()=> { setQuote('24HS'); try { localStorage.setItem('lecapsQuoteMode','24HS'); } catch(_){ } });
       setQuote('CI');
 
       // trend toggle

@@ -132,9 +132,20 @@
       if(S.import){ S.import.addEventListener('change',(e)=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=()=>{ try{ const data=sanitize(JSON.parse(rd.result)); const v=validate(data); if(!v.ok){ S.errors.classList.remove('hidden'); S.errors.innerHTML=v.errors.map(e=>'- '+e).join('<br>'); return; } localStorage.setItem('lecapsData', JSON.stringify(data)); updateStatus(); alert('LECAPs cargado. Abrir pages/lecaps-beta.html para ver los cambios.'); }catch(err){ S.errors.classList.remove('hidden'); S.errors.textContent='JSON invalido: '+err.message; } }; rd.readAsText(f); }); }
       if(S.clear){ S.clear.addEventListener('click', ()=>{ localStorage.removeItem('lecapsData'); updateStatus(); }); }
     })();
+    // Hard bonds admin
+    (function(){
+      const S = { imp: document.getElementById('hard-import-input'), status: document.getElementById('hard-status'), errors: document.getElementById('hard-errors'), clear: document.getElementById('hard-clear') };
+      function sanitize(raw){ try{ const d=JSON.parse(JSON.stringify(raw)); const num=v=> (typeof v==='string'&&v.trim()!==''?Number(v):v); (d.items||[]).forEach(it=>{ it.cupon=num(it.cupon); it.ytm_ea=num(it.ytm_ea); it.ytm_em=num(it.ytm_em); it.precios=it.precios||{}; it.precios.ultimo=num(it.precios.ultimo); }); return d;}catch{return raw;} }
+      function validate(d){ const errs=[]; if(!d||typeof d!=='object') errs.push('Raiz debe ser objeto'); if(!d.version) errs.push('Falta version'); if(!d.updated_at) errs.push('Falta updated_at'); if(!Array.isArray(d.items)) errs.push('items debe ser lista'); (d.items||[]).forEach((it,i)=>{ ['ticker','emision','vencimiento'].forEach(k=>{ if(it[k]==null) errs.push(`item[${i}].${k} requerido`); }); }); return {ok:errs.length===0, errors:errs}; }
+      function update(){ const raw=localStorage.getItem('hardBondsData'); if(!raw){ S.status.textContent='Sin datos locales de Bonos USD.'; return; } try{ const d=JSON.parse(raw); const v=validate(d); if(v.ok){ S.status.textContent=`Bonos USD local cargado: version=${d.version||'-'}, items=${(d.items||[]).length}`; S.errors.classList.add('hidden'); S.errors.textContent=''; } else { S.status.textContent='Bonos USD local invalido.'; S.errors.classList.remove('hidden'); S.errors.innerHTML=v.errors.map(e=>'- '+e).join('<br>'); } }catch{ S.status.textContent='Bonos USD local corrupto.'; } }
+      update();
+      S.imp?.addEventListener('change', (e)=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; const rd=new FileReader(); rd.onload=()=>{ try{ const d=sanitize(JSON.parse(rd.result)); const v=validate(d); if(!v.ok){ S.errors.classList.remove('hidden'); S.errors.innerHTML=v.errors.map(e=>'- '+e).join('<br>'); return; } localStorage.setItem('hardBondsData', JSON.stringify(d)); update(); alert('Bonos USD cargados. Abrir pages/hard-beta.html para ver los cambios.'); }catch(err){ S.errors.classList.remove('hidden'); S.errors.textContent='JSON invalido: '+err.message; } }; rd.readAsText(f); });
+      S.clear?.addEventListener('click', ()=>{ localStorage.removeItem('hardBondsData'); update(); });
+    })();
   </script>
 </body>
 </html>
+
 
 
 

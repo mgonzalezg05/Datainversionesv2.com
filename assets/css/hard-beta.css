@@ -1,0 +1,10 @@
+.hard-container { max-width: 1200px; margin: 0 auto; padding: 1rem 1.25rem; }
+.hard-title { font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 800; letter-spacing: -0.01em; }
+.hard-beta { color:#0369a1; font-weight:700; font-size:0.9em; padding:0.2em 0.5em; border-radius:0.5rem; background:#e0f2fe; }
+.hard-section-title { font-size:1.5rem; font-weight:800; margin: .25rem 0 1rem; color:#0c4a6e; }
+.hard-toggle { display:flex; gap:.5rem; margin:.25rem 0 .5rem; align-items:center; }
+.hard-btn-toggle { appearance:none; border:1px solid #cbd5e1; background:#fff; color:#0f172a; padding:.4rem .8rem; border-radius:.6rem; cursor:pointer; font-weight:600; }
+.hard-btn-toggle.is-active { background:#0284c7; border-color:#0284c7; color:#fff; }
+.hard-switch { display:flex; align-items:center; gap:.5rem; font-weight:600; color:#0f172a; }
+.hard-chart-container { position: relative; height: 400px; width: 100%; }
+.hard-row-highlight { background: rgba(2,132,199,0.10) !important; outline: 1px solid rgba(2,132,199,0.35); }

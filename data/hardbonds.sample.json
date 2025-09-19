@@ -1,0 +1,1 @@
+﻿{ "version":"hardbonds.v1","updated_at":"2025-09-18T12:00:00-03:00","items":[ {"ticker":"AL30","emision":"2020-09-07","vencimiento":"2030-12-31","cupon":0.10,"precios":{"ultimo":33.50},"ytm_ea":0.42}, {"ticker":"AL29","emision":"2020-09-07","vencimiento":"2029-07-09","cupon":0.06,"precios":{"ultimo":36.20},"ytm_ea":0.38}] }

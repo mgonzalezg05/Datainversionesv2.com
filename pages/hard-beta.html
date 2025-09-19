@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bonos USD (beta) â€” Curva y tabla | Datainversiones</title>
+  <meta name="robots" content="index,follow" />
+  <link rel="icon" href="../img/logo.png" type="image/png">
+  <!-- Tailwind + site styles -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../assets/app.css?v=1">
+  <link rel="stylesheet" href="../assets/css/hard-beta.css?v=1" />
+  <!-- Chart.js only on this page -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <!-- Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Bonos USD (beta) â€” Curva y tabla" />
+  <meta property="og:description" content="Vista de bonos soberanos en USD: tabla resumida y curva por YTM." />
+  <meta property="og:url" content="https://mgonzalezg05.github.io/Datainversiones/pages/hard-beta.html" />
+  <meta property="og:site_name" content="Datainversiones.com" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0ea5e9/ffffff.png&text=Bonos+USD+(beta)+%E2%80%94+Curva+y+Tabla" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Bonos USD (beta) â€” Curva y tabla" />
+  <meta name="twitter:description" content="Vista de bonos soberanos en USD: tabla y curva por YTM." />
+  <meta name="twitter:image" content="https://dummyimage.com/1200x630/0ea5e9/ffffff.png&text=Bonos+USD+(beta)+%E2%80%94+Curva+y+Tabla" />
+</head>
+<body class="bg-white text-slate-800 antialiased">
+  <!-- Header -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="../index.html#inicio" class="flex items-center gap-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+          <img src="../img/logo.png" alt="Logo Datainversiones" class="w-12 h-12" style="background:transparent;border-radius:50%;object-fit:contain;" />
+          <span class="font-semibold text-lg">Datainversiones<span class="text-brand-600">.com</span></span>
+        </a>
+        <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+          <a href="../index.html#herramientas" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Herramientas</a>
+          <a href="../index.html#quees" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Que es?</a>
+          <a href="../index.html#blog" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Blog</a>
+          <a href="../index.html#newsletter" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Newsletter</a>
+          <a href="../index.html#testimonios" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Testimonios</a>
+          <a href="../index.html#contacto" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Contacto</a>
+          <a href="./lecaps-beta.html" class="hover:text-brand-600 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">LECAPs (beta)</a>
+          <a href="./hard-beta.html" aria-current="page" class="text-brand-700 underline rounded-md focus:outline-none focus:ring-2 focus:ring-brand-500">Bonos USD (beta)</a>
+          <a href="../admin.html" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 shadow-smooth focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">Panel Admin</a>
+        </nav>
+        <button class="md:hidden inline-flex items-center p-2 rounded-lg hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500" id="menuBtn" aria-label="Abrir menu">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+        </button>
+      </div>
+      <div id="mobileNav" class="md:hidden hidden pb-4">
+        <div class="grid gap-2 text-sm">
+          <a href="../index.html#herramientas" class="px-3 py-2 rounded-lg hover:bg-slate-100">Herramientas</a>
+          <a href="../index.html#quees" class="px-3 py-2 rounded-lg hover:bg-slate-100">Que es?</a>
+          <a href="../index.html#blog" class="px-3 py-2 rounded-lg hover:bg-slate-100">Blog</a>
+          <a href="../index.html#newsletter" class="px-3 py-2 rounded-lg hover:bg-slate-100">Newsletter</a>
+          <a href="../index.html#testimonios" class="px-3 py-2 rounded-lg hover:bg-slate-100">Testimonios</a>
+          <a href="../index.html#contacto" class="px-3 py-2 rounded-lg hover:bg-slate-100">Contacto</a>
+          <a href="./lecaps-beta.html" class="px-3 py-2 rounded-lg hover:bg-slate-100">LECAPs (beta)</a>
+          <a href="./hard-beta.html" aria-current="page" class="px-3 py-2 rounded-lg bg-brand-50 text-brand-700">Bonos USD (beta)</a>
+          <a href="../admin.html" class="px-3 py-2 rounded-lg bg-brand-600 text-white">Panel Admin</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="hard-main hard-container" aria-live="polite">
+    <h1 class="hard-title">Bonos USD <span class="hard-beta">Beta</span></h1>
+
+    <section aria-labelledby="tabla-titulo">
+      <h2 id="tabla-titulo" class="hard-section-title">Tabla Bonos USD</h2>
+      <div class="card" tabindex="0">
+        <div style="overflow-x:auto;">
+          <table id="hard-table">
+            <thead>
+              <tr>
+                <th scope="col" data-key="ticker">Ticker</th>
+                <th scope="col" data-key="vencimiento">Vencimiento</th>
+                <th scope="col" data-key="dias">Dias</th>
+                <th scope="col" data-key="cupon">Cupon</th>
+                <th scope="col" data-key="precio">Precio</th>
+                <th scope="col" data-key="ytm_em">YTM_EM</th>
+                <th scope="col" data-key="ytm_ea">YTM_EA</th>
+              </tr>
+            </thead>
+            <tbody id="hard-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="curva-titulo">
+      <h2 id="curva-titulo" class="hard-section-title">Curva Bonos USD (YTM_EA vs Dias)</h2>
+      <div class="hard-toggle" role="group" aria-label="Seleccionar metrica de curva">
+        <button id="hard-metric-ea" class="hard-btn-toggle is-active" type="button" aria-pressed="true">YTM_EA</button>
+        <button id="hard-metric-em" class="hard-btn-toggle" type="button" aria-pressed="false">YTM_EM</button>
+        <label class="hard-switch" style="margin-left:.5rem;">
+          <input id="hard-trend-toggle" type="checkbox" />
+          <span>Ver tendencia</span>
+        </label>
+      </div>
+      <div class="card">
+        <div class="hard-chart-container">
+          <canvas id="hard-curve" aria-label="Curva de YTM"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-12 border-t border-slate-200" id="terminos">
+    <div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8">
+      <div>
+        <div class="flex items-center gap-2">
+          <img src="../img/logo.png" alt="Logo Datainversiones" class="w-10 h-10" style="background:transparent;border-radius:50%;object-fit:contain;" />
+          <span class="font-semibold">Datainversiones.com</span>
+        </div>
+        <p class="mt-3 text-sm text-slate-600">Informacion y herramientas con fines educativos e informativos. No constituye asesoramiento financiero ni recomendacion de inversion.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold">Links</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li><a class="hover:text-brand-700" href="../index.html#herramientas">Herramientas</a></li>
+          <li><a class="hover:text-brand-700" href="./lecaps-beta.html">LECAPs (beta)</a></li>
+          <li><a class="hover:text-brand-700" href="./hard-beta.html">Bonos USD (beta)</a></li>
+        </ul>
+      </div>
+      <div id="privacidad">
+        <h4 class="font-semibold">Legal</h4>
+        <ul class="mt-3 space-y-2 text-sm">
+          <li>Terminos y Condiciones</li>
+          <li>Politica de Privacidad</li>
+          <li>(c) <span id="year"></span> Datainversiones</li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('menuBtn')?.addEventListener('click', () => {
+        document.getElementById('mobileNav')?.classList.toggle('hidden');
+      });
+      const y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+    });
+  </script>
+  <script src="../assets/js/hard-beta.js?v=1"></script>
+</body>
+</html>
+
+
+
+
